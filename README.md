@@ -1,16 +1,29 @@
-### Hi there 👋
+## Hi there, I'm Coda 
 
-<!--
-**6gunner/6gunner** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+<p align="center">
+<img width="20%" src="https://img.icons8.com/ios-filled/96/000000/programming.png"/>
+</p>
 
-Here are some ideas to get you started:
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+- I'm a **Learner** | **Programmer** 
+- About me : **Blockchain Enthusiast** | **Web3 DApp Developer**
+- Currently **Working on underlying cross-chain bridge services at a blockchain company**
+- Looking forward to contributing more to **Blockchain and Web3 DApp projects**
+
+
+### Programming Languages....
+
+<p align="center">
+  <img width="10%" style="padding:5px" src="https://img.icons8.com/color/144/000000/javascript.png"/>
+	<img width="10%" style="padding:5px" src="https://img.icons8.com/color/144/000000/java-coffee-cup-logo.png"/>
+  <img width="10%" style="padding:5px" src="https://img.icons8.com/color/144/000000/go.png"/>
+</p>
+
+
+#### Profile views counter
+![Visitor Count](https://komarev.com/ghpvc/?username=gunner6)
+
+
+
+
+
