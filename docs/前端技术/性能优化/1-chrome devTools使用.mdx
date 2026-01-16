@@ -1,0 +1,45 @@
+## Chrome devTools使用
+
+### 首先：打开无痕模式
+
+首先打开`Chrome`的无痕模式，这样做的目的是为了屏蔽掉`Chrome`插件对我们之后测试内存占用情况的影响
+
+<img
+  src="https://ipic-coda.oss-cn-beijing.aliyuncs.com/20221022/b8b247ca36a248b1b9f2e46f4c6154a6~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp"
+  alt="img"
+  style={{ zoom: '50%' }}
+/>
+
+### 模拟手机性能
+
+然后打开`开发者工具`，找到`Performance`这一栏，配置4x slowdown，模拟手机cpu性能
+
+<img
+  src="https://ipic-coda-hz.oss-cn-hangzhou.aliyuncs.com/2025-03-06/image-20250306110949192.png"
+  alt="image-20250306110949192"
+  style={{ zoom: '50%' }}
+/>
+
+### 学习面板
+
+可以看到其内部带着一些功能按钮，例如：
+
+- 开始录制按钮；
+- 刷新页面按钮；
+- 清空记录按钮；
+- 记录并可视化js内存、节点、事件监听器按钮；
+- 触发垃圾回收机制按钮等等
+
+![img](https://ipic-coda.oss-cn-beijing.aliyuncs.com/20221022/15734fd88bd54ec787853b0529d76f1a~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
+
+### 查看layers
+
+如何查看layers
+
+<img
+  src="https://ipic-coda-hz.oss-cn-hangzhou.aliyuncs.com/2025-03-19/image-20250319112332594.png"
+  alt="image-20250319112332594"
+  style={{ zoom: '50%' }}
+/>
+
+### 使用lighthouse来优化网站加载速度

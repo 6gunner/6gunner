@@ -1,0 +1,109 @@
+## 情境1：渲染消耗时间过多
+
+#### **分析call tree**
+
+<img
+  src="https://ipic-coda-hz.oss-cn-hangzhou.aliyuncs.com/2025-03-07/image-20250307093928549.png"
+  alt="image-20250307093928549"
+  style={{ zoom: '50%' }}
+/>
+
+分析这里的call tree: requestAnimationFrame触发了函数调用 - app.update, 然后在函数实现里，获取了元素的offsetTop属性，再浏览器进行了重新Layout，以及重新计算style。
+
+#### **结合代码分析：**
+
+**优化前：**
+
+每次update的时候，都会遍历所有的movers，读取mover的offsetTop，而offsetTop是强制属性，每次读取它时都会强制浏览器执行完整的layout计算；
+
+**优化后：**
+
+读取style里的top属性，避免了重新layout计算；
+
+```ts
+app.update = function (timestamp) {
+  for (var i = 0; i < app.count; i++) {
+    var m = movers[i];
+    if (!app.optimize) {
+      var pos = m.classList.contains('down')
+        ? m.offsetTop + distance
+        : m.offsetTop - distance;
+      if (pos < 0) pos = 0;
+      if (pos > maxHeight) pos = maxHeight;
+      m.style.top = pos + 'px';
+      if (m.offsetTop === 0) {
+        m.classList.remove('up');
+        m.classList.add('down');
+      }
+      if (m.offsetTop === maxHeight) {
+        m.classList.remove('down');
+        m.classList.add('up');
+      }
+    } else {
+      var pos = parseInt(m.style.top.slice(0, m.style.top.indexOf('px')));
+      m.classList.contains('down') ? (pos += distance) : (pos -= distance);
+      if (pos < 0) pos = 0;
+      if (pos > maxHeight) pos = maxHeight;
+      m.style.top = pos + 'px';
+      if (pos === 0) {
+        m.classList.remove('up');
+        m.classList.add('down');
+      }
+      if (pos === maxHeight) {
+        m.classList.remove('down');
+        m.classList.add('up');
+      }
+    }
+  }
+  frame = window.requestAnimationFrame(app.update);
+};
+```
+
+**可持续的优化**：这里依然存在的问题是，每一帧里都在对top属性进行更新，虽然浏览器会将这些修改进行批处理。但是最优的方案还是只对 **合成属性（composite props）** 进行修改。
+
+> 浏览器的渲染流程有几个主要阶段：
+>
+> 1. **JavaScript执行**：运行JS代码，进行DOM操作
+> 2. **样式计算**：处理CSS规则，确定每个元素的计算样式
+> 3. **布局**：计算元素的几何信息（位置和大小）
+> 4. **绘制**：将元素绘制到屏幕上
+>
+> 浏览器通常会尝试将这些操作批处理到一个渲染帧中（大约16.7ms，对应60fps）：
+>
+> - 在一个JavaScript执行周期中，多个样式修改会被收集起来
+> - 在JavaScript执行完成后，浏览器会一次性处理所有样式修改，只进行一次布局计算
+> - 这样可以避免多次不必要的计算
+
+**关于composite props**
+
+目前，只有两个属性符合此条件，即 `transform` 和 `opacity`。可以利用transform进行位移，缩放，旋转。
+
+<img
+  src="https://web.dev/static/articles/stick-to-compositor-only-properties-and-manage-layer-count/image/the-properties-can-anima-100ed2c7d26a4.jpg?hl=zh-cn"
+  alt="您可以为以下属性添加动画，而无需触发布局或绘制。"
+  style={{ zoom: '50%' }}
+/>
+
+## 情景二： 处理long task
+
+点击带红色角标的Task
+
+![image-20250318174916722](https://ipic-coda-hz.oss-cn-hangzhou.aliyuncs.com/2025-03-18/image-20250318174916722.png)
+
+然后点call tree, 找到self time很长的代码逻辑
+
+![image-20250318173428703](https://ipic-coda-hz.oss-cn-hangzhou.aliyuncs.com/2025-03-18/image-20250318173428703.png)
+
+点击源码进来查看，定位到这里故意写了slow处理
+
+![image-20250318181208954](https://ipic-coda-hz.oss-cn-hangzhou.aliyuncs.com/2025-03-18/image-20250318181208954.png)
+
+## 情景三：查看Rasterize paint
+
+光栅化相关的，可以点击thread pool来进行查看
+
+<img
+  src="https://developer.chrome.com/static/docs/devtools/performance/reference/image/raster.png?hl=zh-cn"
+  alt="“线程池”部分中的光栅活动。"
+  style={{ zoom: '50%' }}
+/>
