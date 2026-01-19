@@ -107,44 +107,18 @@ const config: Config = {
       },
       {
         name: "algolia-site-verification",
-        content: "92A682F91C75BD93",
+        content: "5FC45086DB2E4F0C",
       }
     ],
     // 开启 algolia
     algolia: {
       // The application ID provided by Algolia
-      appId: 'YOUR_APP_ID',
-
+      appId: 'S0JM98A7PE',
       // Public API key: it is safe to commit it
-      apiKey: 'YOUR_SEARCH_API_KEY',
-
-      indexName: 'YOUR_INDEX_NAME',
-
+      apiKey: '95cd03e0eb0d3caad5bd23fb63d927ef',
+      indexName: 'blog_codastar_me_s0jm98a7pe_pages',
       // Optional: see doc section below
       contextualSearch: true,
-
-      // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
-      externalUrlRegex: 'external\\.com|domain\\.com',
-
-      // Optional: Replace parts of the item URLs from Algolia. Useful when using the same search index for multiple deployments using a different baseUrl. You can use regexp or string in the `from` param. For example: localhost:3000 vs myCompany.com/docs
-      replaceSearchResultPathname: {
-        from: '/docs/', // or as RegExp: /\/docs\//
-        to: '/',
-      },
-
-      // Optional: Algolia search parameters
-      searchParameters: {},
-
-      // Optional: path for search page that enabled by default (`false` to disable it)
-      searchPagePath: 'search',
-
-      // Optional: whether the insights feature is enabled or not on Docsearch (`false` by default)
-      insights: false,
-
-      // Optional: whether you want to use the new Ask AI feature (undefined by default)
-      askAi: 'YOUR_ALGOLIA_ASK_AI_ASSISTANT_ID',
-
-      //... other Algolia params
     },
     navbar: {
       title: "Coda诗人",
