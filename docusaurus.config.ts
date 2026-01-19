@@ -115,10 +115,17 @@ const config: Config = {
       // The application ID provided by Algolia
       appId: 'S0JM98A7PE',
       // Public API key: it is safe to commit it
-      apiKey: '7836aa83226f24986a6460278963cd96',
-      indexName: 'blog_codastar_me_s0jm98a7pe_pages',
+      apiKey: '95cd03e0eb0d3caad5bd23fb63d927ef',
+      indexName: 'blog2',
       // Optional: see doc section below
-      contextualSearch: true,
+      attributes: {
+        primaryText: "hierarchy.lvl0", // the attribute to display in the hits list
+        secondaryText: undefined, // the secondary attribute to display in the hits list
+        tertiaryText: undefined, // the tertiary attribute to display in the hits list
+        url: "", // the URL of the hit
+        image: undefined // the image URL of the hit
+      },
+      darkMode: false,
     },
     navbar: {
       title: "Coda诗人",
