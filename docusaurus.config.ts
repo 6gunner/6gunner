@@ -115,7 +115,7 @@ const config: Config = {
       // The application ID provided by Algolia
       appId: 'S0JM98A7PE',
       // Public API key: it is safe to commit it
-      apiKey: '95cd03e0eb0d3caad5bd23fb63d927ef',
+      apiKey: '7836aa83226f24986a6460278963cd96',
       indexName: 'blog_codastar_me_s0jm98a7pe_pages',
       // Optional: see doc section below
       contextualSearch: true,
