@@ -16,7 +16,7 @@ const config: Config = {
   baseUrl: "/",
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
-  favicon: "/img/meta/favicon.ico",
+  favicon: "/public/favicon.svg",
   organizationName: "Coda",
   projectName: "codastar-blogs",
   presets: [

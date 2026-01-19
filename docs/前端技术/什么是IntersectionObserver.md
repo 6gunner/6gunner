@@ -1,10 +1,32 @@
-## API介绍
 
-### entry对象里有哪些属性？
+我们经常会遇到一个需求：判断一个元素是否是可见的。
+
+以往的做法会需要去拿到这个元素，然后通过`getBoundingClientRect`来计算元素是否在可视区域内。会很繁琐，而且需要频繁的去触发`scroll event`来判断。
+
+## 构造函数
+
+```ts
+new IntersectionObserver((entries) => {
+  /* ... */
+}, options);
+```
+
+intersectionObserver是html5新引入的API，浏览器xxx以上支持。
+
+### 参数1： callback
+
+第一个参数是一个callback；
+
+callback会在entry进入、离开的时候各触发一次；
+
+callback里会附带一个entries数组
+
+### IntersectionObserverEntry实例
+
+callback里的entries是一个数组，每一个entry都是一个IntersectionObserverEntry实例，类型定义如下：
 
 ```ts
 interface IntersectionObserverEntry {
-  /** [MDN Reference](https://developer.mozilla.org/docs/Web/API/IntersectionObserverEntry/boundingClientRect) */
 
   readonly boundingClientRect: DOMRectReadOnly;
 
@@ -33,40 +55,41 @@ interface IntersectionObserverEntry {
 }
 ```
 
-boundingClientReact是target的boundingClient信息
+- boundingClientReact是target的boundingClient信息
 
 <img src="https://ipic-coda-hz.oss-cn-hangzhou.aliyuncs.com/2025-02-17/image-20250217165327414.png" alt="image-20250217165327414" style={{ zoom: '50%' }} />
-
-intersectionReact是target和viewpoint区域相交的boudingClient信息，一个readonly的intersection区域，（但是这个dom并不存在）
+- 
+intersectionReact是target和viewpoint区域相交的boudingClient信息，一个DOMRectReadonly的对象，代表着这个dom实际并不存在
 
 <img src="https://ipic-coda-hz.oss-cn-hangzhou.aliyuncs.com/2025-02-17/image-20250217164935148.png" alt="image-20250217164935148" style={{ zoom: '50%' }} />
 
-### 构造函数的属性
 
-```ts
-new IntersectionObserver((entries) => {
-  /* ... */
-}, options);
-```
 
-第一个参数是callback。callback会在entry进入、离开的时候各触发一次；
+## 参数2： options
 
 第二个参数是options，具体结构如下：
 
 ```
 {
-	threshold: 当target达到多少阈值才触发intersectionobserver的callback事件, 可以传入一个数组：[0.1, 0.5, 1]
-	root: 指定viewer的区域
-	rootMargin: 可以扩充root区域的框高，rootMargin属性和css的盒子模型一样
+	root: document.querySelector("#scrollArea"), 
+	rootMargin: "0px",
+	scrollMargin: "0px", 
+	threshold: 1.0,
 }
 ```
 
+- threshold: 当target达到多少阈值才触发intersectionobserver的callback事件, 可以传入一个数组：[0.1, 0.5, 1]; 分别表示，当target进入可视区域达到10%、50%、100%的时候，各触发一次.
+- root: 指定可视区域, 不指定默认是window对象；
+- rootMargin: 可以扩充root区域的框高，rootMargin属性和css的盒子模型一样
+
 注意：IntersectionObserver的触发是异步，且要等浏览器处于idle空闲期才会触发，所以定义很多阈值并不能保证一定会触发；
 
-### 常见用途：
+
+
+## 常见用途：
 
 - 图片的懒加载
-- 滚屏加载
+- 滚屏无限加载
 
 ```tsx
 'use client';
@@ -92,7 +115,7 @@ const IntersectionDemo = () => {
       root: document.getElementById('container'),
       rootMargin: '0px',
       // 设置多个阈值点
-      threshold: [0.5, 0.8],
+      threshold: [0, 0.8],
     };
 
     const observer = new IntersectionObserver(callback, options);
@@ -157,3 +180,9 @@ const IntersectionDemo = () => {
 
 export default IntersectionDemo;
 ```
+
+## Demo例子
+
+一个参考`# A Fake Blog`react实现，模拟广告穿插在页面中的效果。然后通过检测广告是否在viewport里，并且统计广告的持续时间，超过60s，则替换一些新的广告。
+
+代码位置：https://github.com/6gunner/react-learn/tree/master/react-demo-v19/src/pages/IntersectionObserverDemo
