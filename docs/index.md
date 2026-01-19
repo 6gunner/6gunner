@@ -1,6 +1,7 @@
 ---
 title: 文档首页
 slug: /
+sidebar_position: 0
 ---
 
 # 欢迎来到技术文档
