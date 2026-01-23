@@ -14,8 +14,6 @@ npx depcheck
 
 没安装会提示你安装
 
-
-
 然后分析结果：
 
 ![image-20240716111005681](https://ipic-coda.oss-cn-beijing.aliyuncs.com/2024/07-16/image-20240716111005681.png)
