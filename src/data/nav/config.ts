@@ -135,6 +135,35 @@ export const navDatas: NavCategory[] = [{
   ],
 },
 {
+  category: "AI",
+  items: [
+    {
+      title: "ChatGPT",
+      link: "https://chat.openai.com/",
+      icon: "https://chat.openai.com/favicon.ico",
+      desc: "AI聊天助手"
+    },
+    {
+      title: "Gemini",
+      link: "https://gemini.google/",
+      icon: "https://gemini.google/favicon.ico",
+      desc: "Google AI 聊天助手"
+    },
+    {
+      title: "Claude AI",
+      icon: "https://claude.ai/favicon.ico",
+      desc: "写代码的AI助手",
+      link: "https://claude.ai/"
+    },
+    {
+      title: "MCP Server",
+      link: "https://www.mcpworld.com/zh/",
+      icon: "https://mcpworld.bdstatic.com/store/v2/865ad5d/mcp-server-store/21d60eb/favicon.ico",
+      desc: "MCP Server大全"
+    }
+  ]
+},
+{
   category: "WEB3工具",
   items: [{
     title: "ETH ABI 解码",
@@ -144,7 +173,7 @@ export const navDatas: NavCategory[] = [{
   }, {
     title: "助记词",
     link: "https://iancoleman.io/bip39/#english",
-    icon: "/images/bip39.png",
+    icon: "/images/nav/bip39.png",
     desc: "BIP39助记词相关工具",
   }, {
     title: "Chainlist",
