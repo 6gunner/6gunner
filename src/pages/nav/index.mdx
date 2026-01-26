@@ -1,0 +1,29 @@
+---
+title: Docusaurus Site Showcase
+description: List of websites people are building with Docusaurus
+hide_table_of_contents: true
+---
+
+import LinkCards from './_components/LinkCards';
+import { navDatas } from '@site/src/data/nav/config';
+import TOCInline from '@theme/TOCInline';
+
+export const toc = [
+  {
+    value: '目录',
+    id: '目录',
+    level: 1,
+  },
+].concat(
+  navDatas.map((category) => ({
+    value: category.category,
+    id: category.category.toLowerCase().replace(/\s+/g, '-'),
+    level: 2,
+  }))
+);
+
+<main className="margin-vert--lg">
+  {navDatas.map((category) => (
+    <LinkCards data={category} key={category.category} />
+  ))}
+</main>

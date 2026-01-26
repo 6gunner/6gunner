@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
+import Layout from "@theme/Layout";
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-export default () => {
+function DomEventDemo() {
   useEffect(() => {
     document.getElementById("div1")?.addEventListener("click", () => {
       alert("在父元素div上触发");
@@ -43,4 +44,15 @@ export default () => {
       </TabItem>
     </Tabs>
   );
-};
+}
+
+export default function DomEventDemoPage() {
+  return (
+    <Layout title="DOM Event Demo" description="DOM事件冒泡演示">
+      <div style={{ padding: '2rem' }}>
+        <h1>DOM事件冒泡演示</h1>
+        <DomEventDemo />
+      </div>
+    </Layout>
+  );
+}

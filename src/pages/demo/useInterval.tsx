@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
-import CodeBlock from "@/components/CodeBlock";
+import React, { useState, useEffect, useRef } from 'react';
+import Layout from '@theme/Layout';
+import CodeBlock from '@site/src/components/CodeBlock';
 
-export default () => {
+function UseIntervalDemo() {
   const intervalRef = useRef<number>();
   const saveCallback = useRef<() => void>();
   const [count, setCount] = useState(1);
@@ -30,10 +31,21 @@ export default () => {
 
   return (
     <CodeBlock>
-      <div style={{ margin: "auto", textAlign: "center" }}>
+      <div style={{ margin: 'auto', textAlign: 'center' }}>
         <h1>{count}</h1>
         <button onClick={cancel}>取消</button>
       </div>
     </CodeBlock>
   );
-};
+}
+
+export default function UseIntervalDemoPage() {
+  return (
+    <Layout title="useInterval Hook Demo" description="useInterval Hook 演示">
+      <div style={{ padding: '2rem' }}>
+        <h1>useInterval Hook 演示</h1>
+        <UseIntervalDemo />
+      </div>
+    </Layout>
+  );
+}

@@ -1,8 +1,9 @@
 import React from "react";
+import Layout from "@theme/Layout";
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-export default () => {
+function VerticalAlignDemo2() {
   return (
     <Tabs>
       <TabItem value="1" label="vertical-align: baseline">
@@ -30,4 +31,15 @@ export default () => {
       </TabItem>
     </Tabs>
   );
-};
+}
+
+export default function VerticalAlignDemo2Page() {
+  return (
+    <Layout title="Vertical Align Demo 2" description="Vertical Align 演示 2">
+      <div style={{ padding: '2rem' }}>
+        <h1>Vertical Align 演示 2</h1>
+        <VerticalAlignDemo2 />
+      </div>
+    </Layout>
+  );
+}

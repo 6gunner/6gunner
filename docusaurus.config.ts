@@ -22,12 +22,12 @@ const config: Config = {
     [
       "@docusaurus/preset-classic",
       {
-        // 不要pages里
-        // // 需要指定 pages 的路由路径；因为 blog 作为主页了
-        // pages: {
-        //   path: "src/pages",
-        //   routeBasePath: "/pages",
-        // },
+        // 需要指定 pages 的路由路径
+        pages: {
+          path: "src/pages",
+          routeBasePath: "/",
+
+        },
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
           exclude: ["README.md"],
@@ -60,9 +60,20 @@ const config: Config = {
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
+        svgr: false, // 禁用默认的 SVGR 处理
       } satisfies Preset.Options,
     ],
   ],
+  plugins: [require.resolve("./src/plugins/webpackConfig"), [
+    '@docusaurus/plugin-ideal-image',
+    {
+      quality: 70,
+      max: 1030, // max resized image's size.
+      min: 640, // min resized image's size. if original is lower, use that size.
+      steps: 2, // the max number of images generated between min and max (inclusive)
+      disableInDev: false,
+    }
+  ]],
   stylesheets: [
     {
       href: "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap",
@@ -135,7 +146,6 @@ const config: Config = {
         src: "/logo.svg",
       },
       items: [
-
         {
           label: "前端技术",
           position: "right",

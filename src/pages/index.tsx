@@ -1,12 +1,6 @@
-import { useEffect } from 'react';
-import { useHistory } from '@docusaurus/router';
-
-export default function Home(): JSX.Element {
-  const history = useHistory();
-
-  useEffect(() => {
-    history.push('/docs');
-  }, [history]);
-
-  return null;
+import React from 'react';
+function Home() {
+  return <div>Home</div>;
 }
+
+export default Home;

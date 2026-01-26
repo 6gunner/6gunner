@@ -13,6 +13,7 @@
   --ifm-blockquote-padding-horizontal: 14px;
   --ifm-blockquote-border-left-width: 3px;
   -ms-text-autospace: normal;
+  --ifm-container-width-xl: 1660px;
 }
 
 .docusaurus-highlight-code-line {
@@ -40,4 +41,10 @@ blockquote {
 
 html[data-theme='dark'] blockquote {
   background: rgb(71 71 72);
+}
+
+@media (min-width: 1440px) {
+  .container {
+    max-width: var(--ifm-container-width-xl);
+  }
 }

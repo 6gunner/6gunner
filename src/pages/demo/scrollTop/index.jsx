@@ -1,6 +1,7 @@
 import React from "react";
+import Layout from "@theme/Layout";
 
-export default function () {
+function ScrollTopDemo() {
   const containerDom = React.useRef();
 
   const handleChange = (e) => {
@@ -33,5 +34,16 @@ export default function () {
         ></div>
       </div>
     </div>
+  );
+}
+
+export default function ScrollTopDemoPage() {
+  return (
+    <Layout title="ScrollTop Demo" description="ScrollTop 演示">
+      <div style={{ padding: '2rem' }}>
+        <h1>ScrollTop 演示</h1>
+        <ScrollTopDemo />
+      </div>
+    </Layout>
   );
 }

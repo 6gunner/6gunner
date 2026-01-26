@@ -1,4 +1,5 @@
 import React from "react";
+import Layout from "@theme/Layout";
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
@@ -165,3 +166,43 @@ export const Demo6 = () => {
     </div>
   );
 };
+
+export default function CollapseMarginDemoPage() {
+  return (
+    <Layout title="Margin折叠Demo" description="CSS Margin折叠演示">
+      <div style={{ padding: '2rem' }}>
+        <h1>CSS Margin折叠演示</h1>
+
+        <section style={{ marginBottom: '2rem' }}>
+          <h2>Demo1 - 基础Margin折叠</h2>
+          <Demo1 />
+        </section>
+
+        <section style={{ marginBottom: '2rem' }}>
+          <h2>Demo2 - 带背景的Margin折叠</h2>
+          <Demo2 />
+        </section>
+
+        <section style={{ marginBottom: '2rem' }}>
+          <h2>Demo3 - Overflow Auto</h2>
+          <Demo3 />
+        </section>
+
+        <section style={{ marginBottom: '2rem' }}>
+          <h2>Demo4 - Inline Block</h2>
+          <Demo4 />
+        </section>
+
+        <section style={{ marginBottom: '2rem' }}>
+          <h2>Demo5 - Vertical Align</h2>
+          <Demo5 />
+        </section>
+
+        <section style={{ marginBottom: '2rem' }}>
+          <h2>Demo6 - Padding情况</h2>
+          <Demo6 />
+        </section>
+      </div>
+    </Layout>
+  );
+}

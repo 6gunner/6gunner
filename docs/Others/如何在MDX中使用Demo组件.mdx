@@ -1,0 +1,53 @@
+---
+title: 如何在MDX中使用Demo组件
+description: 演示如何在文档中引入和使用src/demo目录下的交互组件
+---
+
+# 如何在MDX中使用Demo组件
+
+在Docusaurus的MDX文档中，可以直接引入React组件来创建交互式演示。
+
+## 引入方式
+
+在MDX文件顶部使用import语句：
+
+```jsx
+import ExampleDemo from '@/demo/ExampleDemo';
+```
+
+:::info
+`@/demo` 是在 `src/plugins/webpackConfig.js` 中配置的别名，指向 `src/demo` 目录。
+:::
+
+## 使用示例
+
+import ExampleDemo from '@/demo/ExampleDemo';
+
+<ExampleDemo />
+
+## 代码说明
+
+上面的交互式计数器是这样实现的：
+
+1. **创建组件**：在 `src/demo/ExampleDemo.jsx` 中创建React组件
+2. **导入组件**：在MDX文档中使用 `import ExampleDemo from '@/demo/ExampleDemo';`
+3. **使用组件**：在文档中使用 `<ExampleDemo />` 标签
+
+## 目录结构对比
+
+- **`src/demo/`** - 用于在MDX文档中引入的可复用组件
+- **`src/pages/demo/`** - 独立的演示页面，通过URL直接访问（如 `/demo/xxx`）
+
+## 优势
+
+✅ 组件可以在多个文档中复用  
+✅ 支持TypeScript和JSX  
+✅ 可以使用任何React Hook  
+✅ 文档和演示代码分离，便于维护
+
+## 注意事项
+
+1. 组件必须使用 `export default` 导出
+2. 文件扩展名可以是 `.jsx`, `.tsx`, `.js`
+3. 可以在组件中使用Docusaurus主题组件（但不要使用 `Layout`）
+4. 样式可以使用内联样式、CSS Modules 或主题变量
