@@ -144,6 +144,7 @@ const config: Config = {
       logo: {
         alt: "coda",
         src: "/logo.svg",
+        href: "/nav",
       },
       items: [
         {

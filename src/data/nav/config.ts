@@ -197,7 +197,12 @@ export const navDatas: NavCategory[] = [{
     title: "anime.js",
     link: "https://animejs.com/",
     icon: "https://animejs.com/assets/images/favicon.png",
-    desc: "动画"
+    desc: "js动画"
+  }, {
+    title: "MotiView",
+    link: "https://moti.fyi/",
+    icon: "https://moti.fyi/img/favicon.svg",
+    desc: "React Native 动画库"
   }
   ]
 }];
