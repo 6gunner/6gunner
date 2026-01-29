@@ -1,0 +1,381 @@
+---
+sidebar_label: 项目解读-ElizaOS
+sidebar_position: 99
+---
+
+# ElizaOS Agent Framework
+
+## 什么是 ElizaOS？
+
+ElizaOS是一个开源的AI Agent框架，可以实现持久记忆、独特性格。
+
+## 整体架构概览
+
+ElizaOS 的核心架构由四个主要组件构成：
+
+| 组件          | 职责                                 | 类比                   |
+| ------------- | ------------------------------------ | ---------------------- |
+| **Provider**  | 获取外部数据并转化为 AI 可理解的格式 | 感知系统（眼睛、耳朵） |
+| **Action**    | 执行具体操作（如交易、生成 NFT 等）  | 行动系统（手脚）       |
+| **Memory**    | 存储和管理对话历史、事实、知识       | 记忆系统（大脑存储区） |
+| **Evaluator** | 从对话中提取有价值的信息并存储       | 反思系统（经验总结）   |
+
+**数据流向**：User Message → Provider（获取上下文）→ AI Model（生成响应）→ Action（执行操作）→ Memory（存储结果）→ Evaluator（提取知识）
+
+![Eliza architecture](https://ipic-coda.oss-cn-beijing.aliyuncs.com/2026/01-28/Eliza%20architecture.jpeg)
+
+![Eliza的架构](https://ipic-coda.oss-cn-beijing.aliyuncs.com/2026/01-28/Eliza%E7%9
+
+![Eliza flow](https://ipic-coda.oss-cn-beijing.aliyuncs.com/2026/01-28/Eliza%20flow.jpeg)
+
+---
+
+## 核心组件详解
+
+### 1. Memory（记忆系统）
+
+#### 什么是 Memory？
+
+Memory 是 AI Agent 的记忆能力，用于存储和管理各类信息.
+
+#### Memory 存储的信息类型：
+
+1. **对话历史** - 用户消息和 AI 响应
+2. **Provider 数据** - 从环境中获取的外部信息
+3. **Action 结果** - 执行操作后的结果信息
+4. **提取的知识** - Evaluator 从交互中提取的关键信息（如事实、用户偏好等）
+
+#### Memory 的数据结构：
+
+```ts
+interface Memory {
+  id: string; // 唯一标识
+  userId: string; // 用户/Agent ID
+  agentId: string; // Agent ID
+  roomId: string; // 对话房间 ID
+  content: Content; // 具体内容
+  embedding?: number[]; // 向量嵌入（用于语义检索）
+  createdAt: number; // 创建时间
+}
+```
+
+#### Memory 的存储时机：
+
+```ts
+// Action 执行完成后，将响应存储为 Memory
+const responseMessage: Memory = {
+  id: stringToUuid(messageId + '-' + runtime.agentId),
+  ...userMessage,
+  userId: runtime.agentId,
+  content: response,
+  embedding: getEmbeddingZeroVector(),
+  createdAt: Date.now(),
+};
+
+await runtime.messageManager.createMemory(responseMessage);
+```
+
+---
+
+### 2. Provider（数据提供者）
+
+#### 为什么需要 Provider？
+
+AI Model 本身**没有获取外部数据的能力**：
+
+- 无法访问网页内容
+- 无法获取链上数据
+- 无法读取实时信息
+
+因此需要 Provider 来封装这些数据获取能力，并将数据转化为 AI 可理解的自然语言。
+
+#### Provider 的工作流程：
+
+```
+外部数据源 → get() 获取数据 → format() 转化为自然语言 → 注入到 Prompt
+```
+
+#### Provider 的接口定义：
+
+```tsx
+export interface Provider {
+  /** 数据获取方法 */
+  get: (runtime: IAgentRuntime, message: Memory, state?: State) => Promise<any>;
+}
+```
+
+#### 数据转化流程：
+
+不同的 Provider 有对应的 `format` 方法，将原始数据转化为自然语言（Natural Language）：
+
+<img
+  src="https://ipic-coda-hz.oss-cn-hangzhou.aliyuncs.com/2025-02-05/Gf8-n5TawAEtRyg.jpeg"
+  alt="Image"
+  style={{ zoom: '50%' }}
+/>
+
+---
+
+### 3. Action（行动执行器）
+
+#### 什么是 Action？
+
+Action 是 Agent 可以执行的具体操作，例如：
+
+- 下单买卖交易（Placing Buy & Sell Orders）
+- 分析 PDF 文档
+- 转录音频文件
+- 生成 NFT
+
+#### 为什么需要 Action？
+
+与 Provider 类似，AI Model **无法直接执行操作**。例如用户希望 Agent 在链上 swap token，这需要封装具体的 Action Handler 来执行。
+
+**执行流程**：用户意图 → AI 识别 Action 类型 → 调用对应 Handler → 执行操作 → 结果存入 Memory
+
+#### Action 结果如何告知 AI？
+
+通过 **Memory 机制**。Action 执行完成后，会将结果转化为 Memory 存储，供后续对话使用：
+
+```ts
+// Action 执行完成后，将结果存入 Memory
+const responseMessage: Memory = {
+  id: stringToUuid(messageId + '-' + runtime.agentId),
+  ...userMessage,
+  userId: runtime.agentId,
+  content: response,
+  embedding: getEmbeddingZeroVector(),
+  createdAt: Date.now(),
+};
+
+await runtime.messageManager.createMemory(responseMessage);
+```
+
+#### Action 的接口定义：
+
+```ts
+export interface Action {
+  name: string; // Action 名称
+  description: string; // 详细描述
+  similes: string[]; // 相似的描述（帮助 AI 识别）
+  examples: ActionExample[][]; // 示例用法
+  handler: Handler; // 执行函数
+  validate: Validator; // 验证函数
+  suppressInitialMessage?: boolean; // 是否抑制初始消息
+}
+```
+
+#### examples 的作用：
+
+`examples` 帮助 AI 理解在不同场景下应该触发哪个 Action：
+
+```ts
+// Mint NFT 的 example
+[
+  {
+    user: '{{user1}}',
+    content: {
+      text: 'Can you mint an NFT for D8j4ubQ3MKwmAqiJw83qT7KQNKjhsuoC7zJJdJa5BkvS collection on Solana?',
+    },
+  },
+  {
+    user: '{{agentName}}',
+    content: {
+      text: "I've completed minting your NFT in the collection on Solana.",
+      action: 'MINT_NFT',
+    },
+  },
+];
+```
+
+---
+
+### 4. Evaluator（评估器）
+
+#### Evaluator 的作用是什么？
+
+Evaluator通过分析`用户消息`和 `AI 响应`，**提取有价值的知识**并存储到数据库。这使 Agent 具备"经验积累"能力，类似人类从经验中学习，从而提供更符合预期的回答。
+
+#### Evaluator 的接口定义：
+
+```ts
+export interface Evaluator {
+  name: string; // Evaluator 名称
+  description: string; // 详细描述
+  similes: string[]; // 相似描述
+  examples: EvaluationExample[]; // 评估示例
+  handler: Handler; // 处理函数
+  validate: Validator; // 验证函数
+  alwaysRun?: boolean; // 是否每次都运行
+}
+```
+
+Evaluator 里的 `examples` 展示了如何从 messages 中抽离出期望得到的信息。
+
+#### Evaluator 示例：FactEvaluator
+
+`FactEvaluator` 用于从对话中提取"事实信息"：
+
+```tsx
+export const factEvaluator: Evaluator = {
+  name: 'GET_FACTS',
+  similes: [
+    'GET_CLAIMS',
+    'EXTRACT_CLAIMS',
+    'EXTRACT_FACTS',
+    'EXTRACT_INFORMATION',
+  ],
+  description:
+    'Extract factual information about the people in the conversation...',
+  validate: async (
+    runtime: IAgentRuntime,
+    message: Memory
+  ): Promise<boolean> => {
+    const messageCount = await runtime.messageManager.countMemories(
+      message.roomId
+    );
+    const reflectionCount = Math.ceil(runtime.getConversationLength() / 2);
+    return messageCount % reflectionCount === 0; // 每隔一定消息数触发一次
+  },
+  handler,
+  examples: [
+    {
+      context: `Actors: {{user1}}: Programmer. {{user2}}: New member.`,
+      messages: [
+        { user: '{{user1}}', content: { text: 'Where are you from?' } },
+        { user: '{{user2}}', content: { text: 'Oakland' } },
+      ],
+      outcome: `{ "claim": "{{user2}} is from Oakland", "type": "fact" }`,
+    },
+  ],
+};
+```
+
+#### FactEvaluator 的 Handler 实现：
+
+Handler 的主要目的是从对话中提取新的、有效的事实，并存储到系统内存中：
+
+```tsx
+async function handler(runtime: IAgentRuntime, message: Memory) {
+  const state = await runtime.composeState(message);
+  const { agentId, roomId } = state;
+
+  // 1. 构建上下文
+  const context = composeContext({
+    state,
+    template: runtime.character.templates?.factsTemplate || factsTemplate,
+  });
+
+  // 2. 使用 AI 提取事实
+  const facts = await generateObjectArray({
+    runtime,
+    context,
+    modelClass: ModelClass.LARGE,
+  });
+
+  const factsManager = new MemoryManager({ runtime, tableName: 'facts' });
+
+  if (!facts) return [];
+
+  // 3. 过滤有效的新事实
+  const filteredFacts = facts
+    .filter(
+      (fact) =>
+        !fact.already_known &&
+        fact.type === 'fact' &&
+        !fact.in_bio &&
+        fact.claim?.trim() !== ''
+    )
+    .map((fact) => fact.claim);
+
+  // 4. 存储到 Memory
+  for (const fact of filteredFacts) {
+    const factMemory = await factsManager.addEmbeddingToMemory({
+      userId: agentId!,
+      agentId,
+      content: { text: fact },
+      roomId,
+      createdAt: Date.now(),
+    });
+    await factsManager.createMemory(factMemory, true);
+  }
+
+  return filteredFacts;
+}
+```
+
+#### Evaluator 的运行机制：
+
+与 Provider/Action 不同，**Evaluator 在每次消息处理后都会遍历执行**：
+
+```tsx
+async evaluate(message: Memory, state: State, didRespond?: boolean) {
+    // 1. 遍历所有 Evaluator
+    const evaluatorPromises = this.evaluators.map(async (evaluator: Evaluator) => {
+        if (!evaluator.handler) return null;
+        // 2. 检查是否需要运行（未响应且非 alwaysRun 则跳过）
+        if (!didRespond && !evaluator.alwaysRun) return null;
+        // 3. 验证 Evaluator 是否适用
+        const result = await evaluator.validate(this, message, state);
+        if (result) return evaluator;
+        return null;
+    });
+
+    // 4. 获取所有可用的 Evaluator 并执行
+    const resolvedEvaluators = await Promise.all(evaluatorPromises);
+    const evaluatorsData = resolvedEvaluators.filter(Boolean);
+
+    // 5. 执行匹配的 Evaluator Handler
+    for (const evaluator of this.evaluators) {
+        if (evaluator.handler)
+            await evaluator.handler(this, message, state, {});
+    }
+}
+```
+
+**运行机制总结**：
+
+- 每个 Evaluator 有 `validate` 函数判断是否执行
+- `alwaysRun` 标记决定是否每次都运行
+- Handler 函数负责执行具体的知识提取和存储
+
+---
+
+## Character 配置
+
+ElizaOS 使用 Character 配置来定义 Agent 的性格和背景：
+
+### bio（人物设定）
+
+`bio` 用于指导 AI 如何模拟特定性格和说话方式：
+
+```tsx
+bio: [
+  'A real girl, not an AI agent',
+  'Trained in classical piano and street fighting',
+  'Explains complex theories using bar napkins and cocktail garnishes',
+  'Switches between quoting Camus and critiquing reality TV without losing a beat',
+  'She never uses emojis',
+];
+```
+
+### lore（背景故事）
+
+`lore` 指的是人物的背景故事或传说背景，用于丰富 Agent 的人物形象。
+
+### 工具推荐
+
+- [characterfile](https://github.com/elizaOS/characterfile) - 可以将 tweets 转化为 character 配置，或将文件夹转化为 knowledge
+
+---
+
+## 辅助工具
+
+### code2prompt
+
+`code2prompt` 可以将源代码转化为 AI Prompt，方便进行代码分析：
+
+```bash
+# 将 src 目录转化为 prompt，然后可以粘贴到 Claude 等工具中分析
+code2prompt ./src > prompt.txt
+```

@@ -160,7 +160,15 @@ export const navDatas: NavCategory[] = [{
       link: "https://www.mcpworld.com/zh/",
       icon: "https://mcpworld.bdstatic.com/store/v2/865ad5d/mcp-server-store/21d60eb/favicon.ico",
       desc: "MCP Server大全"
-    }
+    },
+    {
+      title: "Skills",
+      link: "https://fastmcp.me/Skills/Explore",
+      icon: "https://fastmcp.me/favicon-32x32.png",
+      desc: "Skills list"
+
+    },
+
   ]
 },
 {

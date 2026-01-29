@@ -48,3 +48,12 @@ html[data-theme='dark'] blockquote {
     max-width: var(--ifm-container-width-xl);
   }
 }
+
+.dropdown-separator {
+  margin: 0.3rem 0;
+  background-color: #dfdddd;
+}
+
+.dropdown__link {
+  font-size: 16px;
+}

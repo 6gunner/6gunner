@@ -1,8 +1,9 @@
 ---
-title: 如何学习3D
+title: 前言 - 如何学习3D
 description: 如何学习3D?
 hide_table_of_contents: false
 sidebar_position: 1
+slug: /3d
 ---
 
 ​ 我有一些有前端开发基础，并熟悉JavaScript和TypeScript，学习Three.js和WebGL来开发3D应用或游戏会更轻松。以下是一个快速学习的路线，帮助你从基础到进阶地掌握3D网页开发技能：

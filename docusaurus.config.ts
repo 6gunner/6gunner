@@ -26,7 +26,6 @@ const config: Config = {
         pages: {
           path: "src/pages",
           routeBasePath: "/",
-
         },
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
@@ -38,25 +37,25 @@ const config: Config = {
           },
         },
         // 不要blog
-        // blog: {
-        //   // blog作为主页
-        //   routeBasePath: "/",
-        //   path: "./blog",
-        //   blogTitle: "前端技术博客 | 专注 React、TypeScript、AI 与性能优化",
-        //   blogDescription:
-        //     "",
-        //   feedOptions: {
-        //     type: "all",
-        //     copyright: `Copyright © ${new Date().getFullYear()} coda`,
-        //     createFeedItems: async (params) => {
-        //       const { blogPosts, defaultCreateFeedItems, ...rest } = params;
-        //       return defaultCreateFeedItems({
-        //         blogPosts: blogPosts.filter((_, index) => index < 20),
-        //         ...rest,
-        //       });
-        //     },
-        //   },
-        // },
+        blog: {
+          // blog作为主页
+          routeBasePath: "/",
+          path: "./blogs",
+          blogTitle: "前端技术博客 | 专注 React、TypeScript、AI 与性能优化",
+          blogDescription:
+            "",
+          feedOptions: {
+            type: "all",
+            copyright: `Copyright © ${new Date().getFullYear()} coda`,
+            createFeedItems: async (params) => {
+              const { blogPosts, defaultCreateFeedItems, ...rest } = params;
+              return defaultCreateFeedItems({
+                blogPosts: blogPosts.filter((_, index) => index < 20),
+                ...rest,
+              });
+            },
+          },
+        },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
@@ -150,23 +149,60 @@ const config: Config = {
         {
           label: "前端技术",
           position: "right",
-          to: "docs/category/前端技术",
+          items: [
+            {
+              label: "react",
+              to: 'docs/frontend/react'
+            },
+            {
+              label: "11",
+              to: "docs/ai/base/httpstreamable",
+            },
+            {
+              type: 'html',
+              value: '<hr class="dropdown-separator">',
+              className: 'dropdown-separator',
+            },
+            {
+              label: "性能优化",
+              to: "docs/ai/agent",
+            },
+          ],
         },
         {
           label: "3D和动画",
           position: "right",
-          to: "docs/category/3D",
+          to: "docs/3d",
         },
 
         {
           label: "Web3区块链",
           position: "right",
-          to: "docs/category/web3",
+          type: "docSidebar",
+          sidebarId: "Web3", // 通过 sidebarId 指定侧边栏
         },
         {
-          label: "AI和智能化",
+          label: "AI",
           position: "right",
-          to: "docs/category/AI和智能化",
+          items: [
+            {
+              label: "sse",
+              to: "docs/ai/base/sse",
+            },
+            {
+              label: "http-streamable",
+              to: "docs/ai/base/httpstreamable",
+            },
+            {
+              type: 'html',
+              value: '<hr class="dropdown-separator">',
+              className: 'dropdown-separator',
+            },
+            {
+              label: "AI Agent",
+              to: "docs/ai/agent",
+            },
+          ],
         },
         {
           label: "移动端和跨平台",

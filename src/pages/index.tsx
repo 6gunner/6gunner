@@ -1,6 +1,7 @@
+import { Redirect } from '@docusaurus/router';
 import React from 'react';
 function Home() {
-  return <div>Home</div>;
+  return <Redirect to="/nav" />;
 }
 
 export default Home;
