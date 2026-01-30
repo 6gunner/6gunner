@@ -1,3 +1,13 @@
+---
+title: SVG 和 PNG 的渲染理论区别
+description: 分析 SVG 和 PNG 在浏览器中的渲染流程和性能差异
+slug: svg-png-rendering
+tags: [svg, png, rendering, performance]
+authors: [keyang]
+hide_table_of_contents: false
+---
+
+<-- truncat -->
 
 ### 渲染流程对比
 

@@ -42,8 +42,11 @@ const config: Config = {
           routeBasePath: "/blog",
           path: "./blogs",
           blogTitle: "前端技术博客 | 专注 React、TypeScript、AI 与性能优化",
+          postsPerPage: 'ALL',
           blogDescription:
             "",
+          blogSidebarCount: 'ALL',
+          blogSidebarTitle: 'All posts',
           feedOptions: {
             type: "all",
             copyright: `Copyright © ${new Date().getFullYear()} coda`,
@@ -142,14 +145,15 @@ const config: Config = {
       hideOnScroll: true,
       logo: {
         alt: "coda",
-        src: "/logo.svg",
+        src: "/logo-light.svg",
+        srcDark: "/logo.svg",
         href: "/nav",
       },
       items: [
         {
           label: "Blog",
           position: "right",
-          to: "/blogs",
+          to: "/blog",
         },
         {
           label: "前端技术",
