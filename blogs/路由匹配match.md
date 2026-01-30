@@ -1,5 +1,17 @@
-path-to-regexp
+---
+title: 路由匹配 path-to-regexp
+description: 使用 path-to-regexp 进行 URL 路径匹配
+slug: path-to-regexp
+tags: [javascript, routing, regex]
+authors: [keyang]
+hide_table_of_contents: false
+---
 
+使用 path-to-regexp 库进行 URL 路径参数匹配的方法和示例
+
+<!-- truncate -->
+
+path-to-regexp
 
 
 

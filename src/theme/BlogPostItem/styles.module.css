@@ -1,0 +1,11 @@
+.blogItemContainer {
+  margin-top: 0;
+  margin-bottom: 2rem;
+  border-radius: var(--ifm-pagination-nav-border-radius);
+  background-color: var(--ifm-background-color);
+  box-shadow: var(--ifm-global-shadow-lw);
+}
+
+.blogItemContainer:hover .readMoreContainer {
+  opacity: 1;
+}

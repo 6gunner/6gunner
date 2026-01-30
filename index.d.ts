@@ -4,10 +4,10 @@ declare module "*.module.css" {
 }
 
 declare module "@theme/*";
-
-declare module "@site/src/components/*";
-
 declare module "@docusaurus/*";
+
+// declare module "@site/src/components/*";
+
 
 
 declare module '*.png' {

@@ -1,3 +1,15 @@
+---
+title: Docusaurus 配置与使用
+description: Docusaurus 配置详解，包括主题、搜索、广告接入等
+slug: docusaurus-config
+tags: [docusaurus, documentation, react]
+authors: [keyang]
+hide_table_of_contents: false
+---
+
+Docusaurus 配置详解，包括主题、搜索、广告等配置方法
+
+<!-- truncate -->
 
 主题css变量：https://docusaurus.community/knowledge/design/css/variables/
 
@@ -89,7 +101,7 @@ fetch,
 
 });
 
-  
+
 
 return await client.getByType('docs_ad');
 
@@ -105,3 +117,4 @@ return setGlobalData({ prismicAds: content.results });
 
 },
 ```
+

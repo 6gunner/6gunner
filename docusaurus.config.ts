@@ -14,7 +14,11 @@ const config: Config = {
   url: SITE_URL,
   baseUrl: "/",
   onBrokenLinks: "warn",
-  onBrokenMarkdownLinks: "warn",
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: "warn",
+    }
+  },
   favicon: "favicon.svg",
   organizationName: "Coda",
   projectName: "codastar-blogs",
@@ -41,10 +45,10 @@ const config: Config = {
           // blog作为主页
           routeBasePath: "/blog",
           path: "./blogs",
-          blogTitle: "前端技术博客 | 专注 React、TypeScript、AI 与性能优化",
+          blogTitle: "随笔记",
           postsPerPage: 'ALL',
           blogDescription:
-            "",
+            "随心所欲 不逾矩",
           blogSidebarCount: 'ALL',
           blogSidebarTitle: 'All posts',
           feedOptions: {
@@ -151,7 +155,7 @@ const config: Config = {
       },
       items: [
         {
-          label: "Blog",
+          label: "随笔记",
           position: "right",
           to: "/blog",
         },
@@ -246,6 +250,21 @@ const config: Config = {
       darkTheme: prismThemes.dracula,
       defaultLanguage: "javascript",
     },
+    giscus: {
+      repo: '6gunner/6gunner',
+      repoId: 'R_kgDOLI29sg',
+      category: 'Announcements',
+      categoryId: 'DIC_kwDOLI29ss4C1pIO',
+      mapping: 'title',
+      strict: '0',
+      reactionsEnabled: '1',
+      emitMetadata: '0',
+      inputPosition: 'bottom',
+      theme: 'preferred_color_scheme',
+      lang: 'zh-CN',
+      crossorigin: 'anonymous',
+      async: true,
+    }
   },
   i18n: {
     defaultLocale: "zh-CN",

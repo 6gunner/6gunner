@@ -1,0 +1,27 @@
+.viewTypeSwitch {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.viewIcon {
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.pageTitle {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.pageDescription {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}

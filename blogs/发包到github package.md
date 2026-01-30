@@ -1,6 +1,19 @@
+---
+title: 发布包到 GitHub Package
+description: 如何将 npm 包发布到 GitHub Package Registry
+slug: publish-github-package
+tags: [npm, github, publishing]
+authors: [keyang]
+hide_table_of_contents: false
+---
+
+如何将 npm 包发布到 GitHub Package Registry，包括配置和发布流程
+
+<!-- truncate -->
+
 #### 怎么将包发布到github package里？
 
-1. 手动publish     
+1. 手动publish
 
 package的scope命名要和org或者username一致
 
@@ -54,6 +67,5 @@ npx changeset version 生成提交记录
 
 npx changeset tag 打上tag标签
 ```
-
 
 

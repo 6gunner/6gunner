@@ -1,0 +1,94 @@
+import Link from '@docusaurus/Link';
+import { translate } from '@docusaurus/Translate';
+import {
+  BlogSidebarItemList,
+  useVisibleBlogSidebarItems,
+} from '@docusaurus/plugin-content-blog/client';
+import { Icon } from '@iconify/react';
+import cn from 'clsx';
+import type { Props as BlogSidebarContentProps } from '@theme/BlogSidebar/Content';
+import BlogSidebarContent from '@theme/BlogSidebar/Content';
+import type { Props } from '@theme/BlogSidebar/Desktop';
+import clsx from 'clsx';
+import { useState } from 'react';
+import styles from './styles.module.css';
+
+const ListComponent: BlogSidebarContentProps['ListComponent'] = ({ items }) => {
+  return (
+    <BlogSidebarItemList
+      items={items}
+      ulClassName={clsx(styles.sidebarItemList, 'clean-list')}
+      liClassName={styles.sidebarItem}
+      linkClassName={styles.sidebarItemLink}
+      linkActiveClassName={styles.sidebarItemLinkActive}
+    />
+  );
+};
+
+export default function BlogSidebarDesktop({ sidebar }: Props): JSX.Element {
+  const items = useVisibleBlogSidebarItems(sidebar.items);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleBack = () => {
+    window.history.back();
+  };
+
+  const handleBackKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleBack();
+    }
+  };
+
+  return (
+    <aside
+      className="col col--2"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <nav
+        className={cn(styles.sidebar, 'thin-scrollbar')}
+        aria-label={translate({
+          id: 'theme.blog.sidebar.navAriaLabel',
+          message: 'Blog recent posts navigation',
+          description: 'The ARIA label for recent posts in the blog sidebar',
+        })}
+      >
+        <div
+          className={styles.backButton}
+          onClick={handleBack}
+          onKeyDown={handleBackKeyDown}
+          role="button"
+          tabIndex={0}
+          style={{ opacity: isHovered ? 1 : 0.3 }}
+        >
+          <Icon icon="ri:arrow-go-back-line" />
+        </div>
+
+        <Link
+          href="/blog"
+          className={cn(styles.sidebarItemTitle)}
+          style={{
+            opacity: isHovered ? 1 : 0,
+            transition: 'opacity 0.3s ease-in-out',
+          }}
+        >
+          {sidebar.title}
+        </Link>
+        <div
+          className="margin-top--sm"
+          style={{
+            opacity: isHovered ? 1 : 0,
+            transition: 'opacity 0.3s ease-in-out',
+          }}
+        >
+          <BlogSidebarContent
+            items={items}
+            ListComponent={ListComponent}
+            yearGroupHeadingClassName={styles.yearGroupHeading}
+          />
+        </div>
+      </nav>
+    </aside>
+  );
+}

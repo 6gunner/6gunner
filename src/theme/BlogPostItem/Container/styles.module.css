@@ -1,0 +1,26 @@
+.container {
+  position: relative;
+  padding: 1rem 1rem 0.75rem 1rem;
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 1rem 1rem 0.75rem 1rem;
+  }
+}
+
+.imageOverlay {
+  z-index: 1;
+  position: absolute;
+  inset: 0;
+  height: 224px;
+}
+
+.imageBackground {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--ifm-pagination-nav-border-radius);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

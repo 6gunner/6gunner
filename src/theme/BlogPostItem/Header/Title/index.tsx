@@ -1,0 +1,26 @@
+import Link from '@docusaurus/Link';
+import { useBlogPost } from '@docusaurus/plugin-content-blog/client';
+import cn from 'clsx';
+import type { Props } from '@theme/BlogPostItem/Header/Title';
+
+import styles from './styles.module.css';
+import React from 'react';
+
+export default function BlogPostItemHeaderTitle({
+  className,
+}: Props): JSX.Element {
+  const { metadata, isBlogPostPage } = useBlogPost();
+  const { permalink, title } = metadata;
+  const TitleHeading = isBlogPostPage ? 'h1' : 'h2';
+  return (
+    <TitleHeading className={cn(styles.title, className)} itemProp="headline">
+      {isBlogPostPage ? (
+        title
+      ) : (
+        <Link itemProp="url" to={permalink} className={styles.titleLink}>
+          {title}
+        </Link>
+      )}
+    </TitleHeading>
+  );
+}
