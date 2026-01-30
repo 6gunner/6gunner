@@ -53,5 +53,5 @@ sidebar_position: 0
 
 **推荐学习的代码库：**
 
-- **Eliza**: 如果想从零了解什么是 AI Agent 及其实现框架，强烈建议阅读 [Eliza](./Eliza的技术原理.md) 的代码。
+- **Eliza**: 如果想从零了解什么是 AI Agent 及其实现框架，强烈建议阅读 [Eliza](./项目解读-ElizaOS.mdx) 的代码。
 - **Clawdbot**:

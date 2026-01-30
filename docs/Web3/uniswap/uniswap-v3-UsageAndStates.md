@@ -1,10 +1,10 @@
 # Usage and States
 
-> V3 的用户交互流程及状态变化; 
+> V3 的用户交互流程及状态变化;
 >
 > 追踪交互动作与状态数据变化的关系，可以帮助我们更好的理解程序运行的逻辑
 
-:warning: **本文档侧重解析 V3 和 V2 的区别**，建议先看 [UniswapV2Interface UsageAndStates](../../Uniswap-V2/Interface/UsageAndStates.md)
+:warning: **本文档侧重解析 V3 和 V2 的区别**
 
 ## 准备工作
 
@@ -26,13 +26,9 @@
 - 自定义 token HEHE(HH) `0x6583989a0b7b86b026e50C4D0fa0FE1C5e3e8f85`
 - 测试网 DAI `0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735`
 
-详细请戳这里 :point_right:[相关辅助数据](./InfoList.md)
-
 ## Swap
 
 token 交易界面
-
-详细代码解析请戳这里 :point_right: [Swap 代码解析](./Code.md#Swap)
 
 ### 交互流程
 
@@ -88,8 +84,6 @@ swap 的交互流程和 V2 一致，内部逻辑的主要区别如下：
 
 查询可回收的手续费
 
-详细代码解析请戳这里 :point_right: [CollectFee 代码解析](./Code.md#CollectFee)
-
 ### 交互流程
 
 - 通过 `ethers.callStatic` 方法，静态调用(不会真实消耗 gas) Manager 合约的 collect 函数，得到最新的可回收手续费的数量。
@@ -104,8 +98,6 @@ swap 的交互流程和 V2 一致，内部逻辑的主要区别如下：
 ## AddLiquidity
 
 添加流动性
-
-详细代码解析请戳这里 :point_right: [AddLiquidity 代码解析](./Code.md#AddLiquidity)
 
 ### init state
 
@@ -228,13 +220,9 @@ const ZOOM_LEVELS: Record<FeeAmount, ZoomLevels> = {
 };
 ```
 
-
-
 ## RemoveLiquidity
 
 移除流动性头寸(position)
-
-详细代码解析请戳这里 :point_right: [RemoveLiquidity 代码解析](./Code.md#RemoveLiquidity)
 
 ### 交互流程
 
