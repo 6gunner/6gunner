@@ -1,3 +1,7 @@
+---
+title: 'next部署到cloudflare'
+---
+
 目前，next打包到cloudflare上，是用`npx @cloudflare/next-on-pages`来打包，
 看build log, 最终运行了`next build`命令。
 

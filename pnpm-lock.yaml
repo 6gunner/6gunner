@@ -38,6 +38,9 @@ importers:
       '@remixicon/react':
         specifier: ^4.8.0
         version: 4.8.0(react@18.3.1)
+      animejs:
+        specifier: ^4.3.5
+        version: 4.3.5
       clsx:
         specifier: ^2.0.0
         version: 2.1.1
@@ -72,6 +75,9 @@ importers:
       '@docusaurus/module-type-aliases':
         specifier: 3.9.2
         version: 3.9.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@docusaurus/plugin-content-blog':
+        specifier: 3.9.2
+        version: 3.9.2(@docusaurus/plugin-content-docs@3.9.2(@mdx-js/react@3.1.1(@types/react@18.3.27)(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4))(@mdx-js/react@3.1.1(@types/react@18.3.27)(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4)
       '@docusaurus/tsconfig':
         specifier: 3.9.2
         version: 3.9.2
@@ -1962,6 +1968,9 @@ packages:
   algoliasearch@5.46.3:
     resolution: {integrity: sha512-n/NdPglzmkcNYZfIT3Fo8pnDR/lKiK1kZ1Yaa315UoLyHymADhWw15+bzN5gBxrCA8KyeNu0JJD6mLtTov43lQ==}
     engines: {node: '>= 14.0.0'}
+
+  animejs@4.3.5:
+    resolution: {integrity: sha512-yuQo/r97TCE+DDu3dTRKjyhBKSEGBcZorWeRW7WCE7EkAQpBoNd2E82dAAD/MDdrbREv7qsw/u7MAqiUX544WQ==}
 
   ansi-align@3.0.1:
     resolution: {integrity: sha512-IOfwwBF5iczOjp/WeY4YxyjqAFMQoZufdQWDd19SEExbVLNXqvpzSJ/M7Za4/sCPmQ0+GRquoA7bGcINcxew6w==}
@@ -8327,6 +8336,8 @@ snapshots:
       '@algolia/requester-browser-xhr': 5.46.3
       '@algolia/requester-fetch': 5.46.3
       '@algolia/requester-node-http': 5.46.3
+
+  animejs@4.3.5: {}
 
   ansi-align@3.0.1:
     dependencies:

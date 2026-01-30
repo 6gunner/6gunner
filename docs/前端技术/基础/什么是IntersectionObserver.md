@@ -1,3 +1,6 @@
+---
+slug: /frontend/base/intersection-observer
+---
 
 我们经常会遇到一个需求：判断一个元素是否是可见的。
 
@@ -27,7 +30,6 @@ callback里的entries是一个数组，每一个entry都是一个IntersectionObs
 
 ```ts
 interface IntersectionObserverEntry {
-
   readonly boundingClientRect: DOMRectReadOnly;
 
   /** [MDN Reference](https://developer.mozilla.org/docs/Web/API/IntersectionObserverEntry/intersectionRatio) */
@@ -58,12 +60,10 @@ interface IntersectionObserverEntry {
 - boundingClientReact是target的boundingClient信息
 
 <img src="https://ipic-coda-hz.oss-cn-hangzhou.aliyuncs.com/2025-02-17/image-20250217165327414.png" alt="image-20250217165327414" style={{ zoom: '50%' }} />
-- 
-intersectionReact是target和viewpoint区域相交的boudingClient信息，一个DOMRectReadonly的对象，代表着这个dom实际并不存在
+
+- intersectionReact是target和viewpoint区域相交的boudingClient信息，一个DOMRectReadonly的对象，代表着这个dom实际并不存在
 
 <img src="https://ipic-coda-hz.oss-cn-hangzhou.aliyuncs.com/2025-02-17/image-20250217164935148.png" alt="image-20250217164935148" style={{ zoom: '50%' }} />
-
-
 
 ## 参数2： options
 
@@ -71,9 +71,9 @@ intersectionReact是target和viewpoint区域相交的boudingClient信息，一�
 
 ```
 {
-	root: document.querySelector("#scrollArea"), 
+	root: document.querySelector("#scrollArea"),
 	rootMargin: "0px",
-	scrollMargin: "0px", 
+	scrollMargin: "0px",
 	threshold: 1.0,
 }
 ```
@@ -83,8 +83,6 @@ intersectionReact是target和viewpoint区域相交的boudingClient信息，一�
 - rootMargin: 可以扩充root区域的框高，rootMargin属性和css的盒子模型一样
 
 注意：IntersectionObserver的触发是异步，且要等浏览器处于idle空闲期才会触发，所以定义很多阈值并不能保证一定会触发；
-
-
 
 ## 常见用途：
 

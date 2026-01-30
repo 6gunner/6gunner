@@ -15,7 +15,7 @@ const config: Config = {
   baseUrl: "/",
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
-  favicon: "/public/favicon.svg",
+  favicon: "favicon.svg",
   organizationName: "Coda",
   projectName: "codastar-blogs",
   presets: [
@@ -39,7 +39,7 @@ const config: Config = {
         // 不要blog
         blog: {
           // blog作为主页
-          routeBasePath: "/",
+          routeBasePath: "/blog",
           path: "./blogs",
           blogTitle: "前端技术博客 | 专注 React、TypeScript、AI 与性能优化",
           blogDescription:
@@ -147,16 +147,26 @@ const config: Config = {
       },
       items: [
         {
+          label: "Blog",
+          position: "right",
+          to: "/",
+        },
+        {
           label: "前端技术",
           position: "right",
           items: [
             {
-              label: "react",
-              to: 'docs/frontend/react'
+              label: "基础",
+              to: 'docs/前端技术/基础'
             },
             {
-              label: "11",
-              to: "docs/ai/base/httpstreamable",
+              type: 'html',
+              value: '<hr class="dropdown-separator">',
+              className: 'dropdown-separator',
+            },
+            {
+              label: "React",
+              to: 'docs/前端技术/react'
             },
             {
               type: 'html',
@@ -165,7 +175,7 @@ const config: Config = {
             },
             {
               label: "性能优化",
-              to: "docs/ai/agent",
+              to: "docs/前端技术/性能优化",
             },
           ],
         },
@@ -215,10 +225,14 @@ const config: Config = {
           to: "docs/category/Others",
         },
         {
+          label: "Resume",
+          position: "right",
+          href: "https://www.codastar.me/",
+        },
+        {
           type: "search",
           position: "right",
         },
-
       ],
     },
     liveCodeBlock: {
