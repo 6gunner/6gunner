@@ -223,9 +223,10 @@ const config: Config = {
           ],
         },
         {
-          label: "移动端和跨平台",
+          label: "跨平台",
           position: "right",
-          to: "docs/category/移动端和跨平台",
+          type: "docSidebar",
+          sidebarId: "跨平台",
         },
         {
           label: "Resume",
