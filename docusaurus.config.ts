@@ -149,7 +149,7 @@ const config: Config = {
         {
           label: "Blog",
           position: "right",
-          to: "/",
+          to: "/blogs",
         },
         {
           label: "前端技术",
@@ -220,13 +220,8 @@ const config: Config = {
           to: "docs/category/移动端和跨平台",
         },
         {
-          label: "Others",
-          position: "right",
-          to: "docs/category/Others",
-        },
-        {
           label: "Resume",
-          position: "right",
+          position: "left",
           href: "https://www.codastar.me/",
         },
         {
