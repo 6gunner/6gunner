@@ -1,4 +1,12 @@
 
+---
+title: 深入理解 React 18 的并发特性
+description: 详细解析 React 18 并发特性的设计原理、workLoop 调度机制、以及如何通过时间切片解决主线程阻塞问题
+slug: react-18-concurrency
+sidebar_position: 1
+tags: [react, react-18, 前端, javascript, 并发]
+keywords: [React 并发, Fiber, Concurrent Mode, 时间切片, shouldYield, 调度]
+---
 
 ### 为什么会引入并发的设计？
 

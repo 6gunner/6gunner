@@ -1,0 +1,15 @@
+# robots.txt for Coda's Blogs
+# https://blog.codastar.me
+
+User-agent: *
+Allow: /
+
+# Disallow admin/private pages
+Disallow: /search
+Disallow: /docs/tags
+Disallow: /blog/archive
+Disallow: /blog/authors
+Disallow: /blog/tags
+
+# Sitemap
+Sitemap: https://blog.codastar.me/sitemap.xml

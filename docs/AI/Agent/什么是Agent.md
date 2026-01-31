@@ -1,6 +1,10 @@
 ---
-slug: /ai/agent
+title: AI Agent 是什么 - 全面解析人工智能代理
+description: 从 5W1H 角度拆解 AI Agent，分析其定义、能力边界、实现方式，以及为什么它是 LLM 的重要扩展
+slug: ai-agent-explained
 sidebar_position: 0
+tags: [AI, Agent, LLM, 人工智能, 机器学习]
+keywords: [AI Agent, 人工智能代理, LLM, 自主代理, AI 助手]
 ---
 
 > 本文还是尝试从 5W1H 的角度 ("What", "Why", "How" 等) 来对 AI Agent 进行拆解和分析。

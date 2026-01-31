@@ -106,12 +106,32 @@ const config: Config = {
       {
         name: "description",
         content:
-          "探索前端性能优化、React 源码剖析与实战技巧，通过实用案例和代码演示，助你打造高效、优雅的现代 Web 应用。立即阅读，提升开发技能！",
+          "前端工程师技术博客，分享React、JavaScript、Web3、区块链、AI等技术文章和实践笔记",
       },
       {
         name: "keywords",
         content:
-          "frontend, react, javascript, css, react, vue, typescript, docusaurus, blog, personal blog, personal website",
+          "前端开发, React, TypeScript, JavaScript, Web3, 区块链, 智能合约, AI, 机器学习, 技术博客, Docusaurus",
+      },
+      {
+        name: "author",
+        content: "Coda",
+      },
+      {
+        name: "twitter:creator",
+        content: "@coda_dev",
+      },
+      {
+        name: "twitter:image",
+        content: "https://blog.codastar.me/images/og-image.png",
+      },
+      {
+        property: "og:image",
+        content: "https://blog.codastar.me/images/og-image.png",
+      },
+      {
+        property: "og:type",
+        content: "website",
       },
       {
         name: "algolia-site-verification",

@@ -1,6 +1,7 @@
 ---
-title: 文档首页
-slug: /
+title: 技术文档首页
+description: Coda's Blogs 技术文档中心，涵盖前端技术、3D渲染、Web3区块链、AI人工智能、跨平台开发等领域的学习笔记和实践总结
+slug: docs
 sidebar_position: 0
 ---
 

@@ -1,5 +1,10 @@
 ---
+title: 什么是 MCP Server - Model Context Protocol 详解
+description: 深入理解 Anthropic 提出的 MCP（Model Context Protocol）标准协议，它是 AI 应用与外部系统通信的"USB接口"
+slug: mcp-server-explained
 sidebar_position: 1
+tags: [AI, MCP, Anthropic, Claude, Agent, 协议]
+keywords: [MCP, Model Context Protocol, AI Agent, 工具调用, 外部集成]
 ---
 
 ## 定义

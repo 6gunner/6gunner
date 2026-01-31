@@ -31,35 +31,6 @@ function BlogListPageMetadata(props: Props): JSX.Element {
   );
 }
 
-function ViewTypeSwitch({
-  viewType,
-  toggleViewType,
-}: {
-  viewType: ViewType;
-  toggleViewType: (viewType: ViewType) => void;
-}): JSX.Element {
-  return (
-    <div className={styles.viewTypeSwitch}>
-      <Icon
-        icon="ph:list"
-        width="24"
-        height="24"
-        onClick={() => toggleViewType('list')}
-        color={viewType === 'list' ? 'var(--ifm-color-primary)' : '#ccc'}
-        className={styles.viewIcon}
-      />
-      <Icon
-        icon="ph:grid-four"
-        width="24"
-        height="24"
-        onClick={() => toggleViewType('grid')}
-        color={viewType === 'grid' ? 'var(--ifm-color-primary)' : '#ccc'}
-        className={styles.viewIcon}
-      />
-    </div>
-  );
-}
-
 function BlogListPageContent(props: Props) {
   const { metadata, items } = props;
   const { blogTitle, blogDescription } = metadata;
