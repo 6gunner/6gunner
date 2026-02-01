@@ -1,3 +1,7 @@
+---
+sidebar_position: 6
+---
+
 ## 怎么理解Suspense
 
 将Suspense理解成组件树上的一个“断路器”
@@ -6,13 +10,9 @@
 
 然后用降级方案去渲染（也就是我们的fallback）
 
-
-
 Suspense阻塞的不是组件的render，而是阻止一个组件树进入commit阶段
 
 当发现组件没有准备好时，这个组件的render就会被中断。
-
-
 
 ## 关于Suspense的作用
 
@@ -33,7 +33,7 @@ Suspense阻塞的不是组件的render，而是阻止一个组件树进入commit
 但是如果我们在useTransistion的回调里修改tab，不会立即触发Suspense的fallback ui，而是等组件准备才会渲染。
 
 ```tsx
-export const Component =  function App() {
+export const Component = function App() {
   const [tab, setTab] = useState('home');
 
   // 1. 使用 useTransition 钩子
@@ -51,11 +51,13 @@ export const Component =  function App() {
   }
 
   return (
-    <div style={{ opacity: isPending ? 0.7 : 1 }}> {/* 3. 视觉反馈：加载时旧界面变淡，但不消失 */}
+    <div style={{ opacity: isPending ? 0.7 : 1 }}>
+      {' '}
+      {/* 3. 视觉反馈：加载时旧界面变淡，但不消失 */}
       <nav>
         <button onClick={() => handleTabChange('home')}>首页</button>
         <button onClick={() => handleTabChange('profile')}>
-          个人资料 {isPending && " (加载中...)"}
+          个人资料 {isPending && ' (加载中...)'}
         </button>
       </nav>
       <hr />
@@ -63,17 +65,15 @@ export const Component =  function App() {
         如果没有 startTransition，点击按钮会立刻看到这个 fallback。
         有了 startTransition，React 会尽量在后台加载 ProfilePage，直到加载完才切换。
       */}
-      <Suspense fallback={<p>正全力跳转中（这里通常不会在 Transition 时闪现）...</p>}>
+      <Suspense
+        fallback={<p>正全力跳转中（这里通常不会在 Transition 时闪现）...</p>}
+      >
         {tab === 'home' ? <p>欢迎来到首页</p> : <ProfilePage />}
       </Suspense>
     </div>
   );
-}
+};
 ```
-
-
-
-
 
 ## Suspense fallback的原理是什么？
 
@@ -84,6 +84,3 @@ Suspense会捕获这个promise，然后展示fallback ui。
 当Promise resolved后,React会尝试重新渲染子组件。
 
 如果Promise不resolve，Suspense会一直展示fallback
-
-
-

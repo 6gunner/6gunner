@@ -27,6 +27,7 @@ module.exports = function () {
           alias: {
             '@/demo': path.resolve(process.cwd(), './src/demo'),
             '@/components': path.resolve(process.cwd(), './src/components'),
+            '@/data': path.resolve(process.cwd(), './src/data'),
           },
           extensions: ['.js', '.jsx'],
         },

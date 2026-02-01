@@ -12,8 +12,7 @@ export default function Home() {
 
     // 视频播放完成后跳转
     const handleVideoEnded = () => {
-      console.log('视频播放完成，跳转到 /docs');
-      history.replace('/docs');
+      history.replace('/nav');
     };
 
     if (video) {

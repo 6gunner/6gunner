@@ -1,4 +1,8 @@
-# useEffect 的执行机制
+---
+sidebar_position: 5
+---
+
+# 如何理解useEffect的执行机制
 
 > 本文聚焦 useEffect 的整体执行流程和关键机制，不深入源码细节。
 
@@ -75,8 +79,6 @@ Commit 阶段分为三个子阶段，useEffect 的处理贯穿其中。
 2. **同步执行 `useLayoutEffect`**的setup方法：
 3. 将带有 `HasUpdate` 标记的 `useEffect` 加入到一个全局的 **Pending 队列**（`pendingPassiveEffects`）。
 
-
-
 ### 3.4 Layout 完成后
 
 Commit 阶段完成后：
@@ -115,13 +117,13 @@ Commit 阶段完成后：
 
 ## 五、useEffect vs useLayoutEffect
 
-| 对比维度 | useEffect | useLayoutEffect |
-|----------|-----------|-----------------|
-| **执行时机** | Commit 完成后，浏览器绘制**之后**，异步执行 | Layout 阶段中，浏览器绘制**之前**，同步执行 |
-| **是否阻塞渲染** | 否，不影响首次绘制 | 是，会延迟浏览器绘制 |
-| **调度方式** | 宏任务（MessageChannel） | 同步执行 |
-| **适用场景** | 数据获取、订阅、日志记录等 | 读取 DOM 布局、同步修改 DOM 避免闪烁 |
-| **性能影响** | 优，不阻塞渲染 | 差，会让用户感觉卡顿 |
+| 对比维度         | useEffect                                   | useLayoutEffect                             |
+| ---------------- | ------------------------------------------- | ------------------------------------------- |
+| **执行时机**     | Commit 完成后，浏览器绘制**之后**，异步执行 | Layout 阶段中，浏览器绘制**之前**，同步执行 |
+| **是否阻塞渲染** | 否，不影响首次绘制                          | 是，会延迟浏览器绘制                        |
+| **调度方式**     | 宏任务（MessageChannel）                    | 同步执行                                    |
+| **适用场景**     | 数据获取、订阅、日志记录等                  | 读取 DOM 布局、同步修改 DOM 避免闪烁        |
+| **性能影响**     | 优，不阻塞渲染                              | 差，会让用户感觉卡顿                        |
 
 ### 5.1 使用建议
 
@@ -150,7 +152,7 @@ Commit 阶段完成后：
 ```javascript
 useEffect(() => {
   const timer = setInterval(() => console.log('tick'), 1000);
-  
+
   return () => clearInterval(timer); // cleanup
 }, []);
 ```
@@ -170,8 +172,12 @@ useEffect(() => console.log('Effect 2'), []); // 后执行
 ### 6.4 deps 为空数组 vs 不传 deps
 
 ```javascript
-useEffect(() => { /* ... */ }, []);    // 只在 mount 时执行一次
-useEffect(() => { /* ... */ });        // 每次渲染都执行
+useEffect(() => {
+  /* ... */
+}, []); // 只在 mount 时执行一次
+useEffect(() => {
+  /* ... */
+}); // 每次渲染都执行
 ```
 
 - `[]` - 相当于 `componentDidMount`

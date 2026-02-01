@@ -1,4 +1,8 @@
-# React 的两个阶段
+---
+sidebar_position: 0
+---
+
+# 如何理解react的两个阶段
 
 ## 一、概述
 
